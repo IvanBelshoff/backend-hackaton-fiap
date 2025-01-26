@@ -5,6 +5,9 @@ export const getByEmail = async (email: string): Promise<Usuario | Error> => {
     try {
 
         const result = await usuarioRepository.findOne({
+            relations: {
+                foto: true
+            },
             where: {
                 email: email
             }
