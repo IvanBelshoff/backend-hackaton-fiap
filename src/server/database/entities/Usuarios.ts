@@ -32,6 +32,9 @@ export class Usuario {
     @Column({ type: 'text', nullable: false, unique: true })
     email: string
 
+    @Column({ type: 'text', nullable: false, unique: true })
+    api_key: string
+
     @Column({ default: false })
     bloqueado: boolean
     

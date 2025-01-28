@@ -38,6 +38,7 @@ export async function UserDefault() {
                 tipo_usuario: TipoUsuario.ADM,
                 email: email,
                 senha: hashPassword,
+                api_key: process.env.API_KEY_USER_DEFAULT,
                 foto: foto || undefined,
                 usuario_cadastrador: `${process.env.NAME_USER_DEFAULT} ${process.env.SOBRENOME_USER_DEFAULT}`,
                 usuario_atualizador: `${process.env.NAME_USER_DEFAULT} ${process.env.SOBRENOME_USER_DEFAULT}`,

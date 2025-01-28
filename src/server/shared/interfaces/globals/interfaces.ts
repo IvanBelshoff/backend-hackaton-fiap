@@ -36,5 +36,6 @@ export interface ILogin {
     accessToken: string;
     id: number;
     typeUser: TipoUsuario,
+    api_key: string;
     foto: IFoto;
 }

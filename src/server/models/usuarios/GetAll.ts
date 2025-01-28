@@ -5,7 +5,7 @@ import { usuarioRepository } from '../../database/repositories';
 export const getAll = async (
     page?: number,
     limit?: number,
-    filter?: string): Promise<Omit<Usuario, 'senha' | 'foto'>[] | Error> => {
+    filter?: string): Promise<Omit<Usuario, 'senha' | 'foto' | 'api_key'>[] | Error> => {
     try {
 
         const result = usuarioRepository.createQueryBuilder('usuario')
@@ -23,7 +23,7 @@ export const getAll = async (
         const usuarios = await result.getMany();
 
 
-        const newUsers: Omit<Usuario, 'senha' | 'foto'>[] = usuarios.map(user => ({
+        const newUsers: Omit<Usuario, 'senha' | 'foto' | 'api_key'>[] = usuarios.map(user => ({
             id: user.id,
             nome: user.nome,
             bloqueado: user.bloqueado,

@@ -15,6 +15,7 @@ export const createValidation = validation((getSchema) => ({
         sobrenome: yup.string().required().min(3),
         senha: yup.string().required().min(6),
         email: yup.string().required().email().min(5),
+        api_key: yup.string().required(),
         bloqueado: yup.boolean().required(),
         tipo_usuario: yup.string().required().oneOf(Object.values(TipoUsuario), 'Inválido')
     })),

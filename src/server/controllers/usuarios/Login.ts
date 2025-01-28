@@ -74,6 +74,7 @@ export const login = async (req: Request<{}, {}, IBodyLoginUsuarios>, res: Respo
             accessToken: accessToken,
             id: Number(usuario.id),
             typeUser: usuario.tipo_usuario,
+            api_key: usuario.api_key,
             foto: {
                 nome: usuario.foto.nome || 'profile.jpg',
                 originalname: usuario.foto.originalname || 'profile.jpg',
