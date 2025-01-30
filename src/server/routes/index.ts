@@ -19,7 +19,7 @@ router.get('/usuarios/:id', EnsureAuthenticated, UsuariosController.getByIdValid
 router.put('/usuarios/:id', EnsureAuthenticated, SalvarFoto(), UsuariosController.updataByIdValidation, UsuariosController.updateById);
 router.delete('/usuarios/foto/:id', EnsureAuthenticated, UsuariosController.deleteFotoByIdValidation, UsuariosController.deleteFotoById);
 router.delete('/usuarios/:id', EnsureAuthenticated, UsuariosController.deleteByIdValidation, UsuariosController.deleteById);
-
+router.patch('/usuarios/password/:id', EnsureAuthenticated, UsuariosController.resetPasswordByIdValidation, UsuariosController.resetPasswordById);
 //Planos
 router.post('/planos', EnsureAuthenticated, PlanosController.createValidation, PlanosController.create);
 router.get('/planos', EnsureAuthenticated, PlanosController.getAllValidation, PlanosController.getAll);

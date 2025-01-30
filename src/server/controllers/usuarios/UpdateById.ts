@@ -18,7 +18,7 @@ export const updataByIdValidation = validation((getSchema) => ({
         senha: yup.string().optional().min(6),
         email: yup.string().required().email().min(5),
         api_key: yup.string().required(),
-        bloqueado: yup.boolean().required(),
+        bloqueado: yup.boolean().optional(),
         tipo_usuario: yup.string().required().oneOf(Object.values(TipoUsuario), 'Inválido'),
     })),
     params: getSchema<IParamsIdGlobal>(yup.object().shape({
@@ -68,7 +68,7 @@ export const updateById = async (req: Request<IParamsIdGlobal, {}, IBodyUpdateBy
         tamanho: req.file.size,
         tipo: req.file.mimetype,
         width: (await sharp(req.file.path).metadata()).width || undefined,
-        height: (await sharp(req.file.path).metadata()).height || undefined 
+        height: (await sharp(req.file.path).metadata()).height || undefined
     });
 
     if (result instanceof Error) {
@@ -79,6 +79,6 @@ export const updateById = async (req: Request<IParamsIdGlobal, {}, IBodyUpdateBy
         });
     }
 
-    return res.status(StatusCodes.NO_CONTENT).send();
+    return res.status(StatusCodes.OK).json(result);
 
 };

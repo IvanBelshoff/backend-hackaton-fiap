@@ -6,6 +6,7 @@ import * as RecoverPassword from './RecoverPassword';
 import * as UpdateById from './UpdateById';
 import * as DeleteFotoById from './DeleteFotoById';
 import * as DeleteById from './DeleteById';
+import * as ResetPasswordById from './ResetPasswordById';
 
 export const UsuariosController = {
     ...Login,
@@ -15,5 +16,6 @@ export const UsuariosController = {
     ...UpdateById,
     ...DeleteFotoById,
     ...GetById,
-    ...DeleteById
+    ...DeleteById,
+    ...ResetPasswordById
 };

@@ -9,6 +9,7 @@ import * as ValidaEmailUsuario from './ValidaEmailUsuario';
 import * as GetStatusCount from './GetStatusCount';
 import * as UpdateUsuarioAtualizador from './UpdateUsuarioAtualizador';
 import * as UpdateDateLogin from './UpdateDateLogin';
+import * as ResetPasswordById from './ResetPasswordById';
 
 export const UsuariosProvider = {
     ...GetByEmail,
@@ -21,5 +22,6 @@ export const UsuariosProvider = {
     ...GetById,
     ...GetStatusCount,
     ...UpdateUsuarioAtualizador,
-    ...UpdateDateLogin
+    ...UpdateDateLogin,
+    ...ResetPasswordById
 };

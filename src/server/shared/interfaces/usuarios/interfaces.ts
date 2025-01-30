@@ -20,8 +20,10 @@ export interface IQueryRecoverPasswordUsuarios {
     numeros?: number;
 }
 
-export interface IBodyUpdateByIdUsuarios extends Omit<Usuario, 'id' | 'data_criacao' | 'data_atualizacao' | 'foto' | 'planos'> { }
+export interface IBodyUpdateByIdUsuarios extends Omit<Usuario, 'id' | 'bloqueado' | 'data_criacao' | 'data_atualizacao' | 'foto' | 'planos'> { bloqueado?: boolean }
 
 export interface IEmailValidaEmailUsuario {
     email?: string
 }
+
+export interface IBodyPassword { senha: string }
