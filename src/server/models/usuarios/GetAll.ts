@@ -9,6 +9,7 @@ export const getAll = async (
     try {
 
         const result = usuarioRepository.createQueryBuilder('usuario')
+            .leftJoinAndSelect('usuario.foto', 'foto')
             .orderBy('usuario.nome', 'DESC');
 
         if (page && typeof page == 'string' && limit && typeof limit == 'string') {
@@ -23,7 +24,7 @@ export const getAll = async (
         const usuarios = await result.getMany();
 
 
-        const newUsers: Omit<Usuario, 'senha' | 'foto' | 'api_key'>[] = usuarios.map(user => ({
+        const newUsers: Omit<Usuario, 'senha' | 'api_key'>[] = usuarios.map(user => ({
             id: user.id,
             nome: user.nome,
             bloqueado: user.bloqueado,
@@ -35,7 +36,8 @@ export const getAll = async (
             data_atualizacao: user.data_atualizacao,
             ultimo_login: user.ultimo_login,
             usuario_atualizador: user.usuario_atualizador,
-            usuario_cadastrador: user.usuario_cadastrador
+            usuario_cadastrador: user.usuario_cadastrador,
+            foto: user.foto
         }));
 
         return newUsers;

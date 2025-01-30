@@ -1,6 +1,6 @@
 import { Usuario } from '../../../database/entities';
 
-export interface IBodyCreateUsuarios extends Omit<Usuario, 'id' | 'data_criacao' | 'data_atualizacao' | 'foto' | 'planos'> { }
+export interface IBodyCreateUsuarios extends Omit<Usuario, 'id' | 'data_criacao' | 'data_atualizacao' | 'foto' | 'planos' | 'bloqueado'> { bloqueado?: boolean}
 
 export interface IQueryGetAllUsuarios {
     page?: number;
