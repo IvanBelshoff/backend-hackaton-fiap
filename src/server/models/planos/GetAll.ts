@@ -2,13 +2,17 @@ import { Plano } from '../../database/entities';
 import { planoRepository } from '../../database/repositories/planoRepository';
 
 export const getAll = async (
+    id: number,
     page?: number,
     limit?: number,
-    filter?: string): Promise<Plano[] | Error> => {
+    filter?: string
+): Promise<Plano[] | Error> => {
     try {
 
         const result = planoRepository.createQueryBuilder('plano')
-            .orderBy('plano.data_criacao', 'DESC');
+            .leftJoinAndSelect('plano.usuario', 'usuario')
+            .orderBy('plano.data_criacao', 'DESC')
+            .where('usuario.id = :id', { id });
 
         if (page && typeof page == 'string' && limit && typeof limit == 'string') {
             result.take(page * limit);

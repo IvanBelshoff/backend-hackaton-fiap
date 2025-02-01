@@ -1,8 +1,10 @@
 import { Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
 import * as yup from 'yup';
+import { ParamsDictionary } from 'express-serve-static-core';
+import { ParsedQs } from 'qs';
 
-import { validation } from '../../shared/middlewares';
+import { decoder, validation } from '../../shared/middlewares';
 import { IQueryGetAllUsuarios } from '../../shared/interfaces';
 import { PlanosProvider } from '../../models/planos';
 
@@ -16,13 +18,26 @@ export const getAllValidation = validation((getSchema) => ({
 
 export const getAll = async (req: Request<{}, {}, {}, IQueryGetAllUsuarios>, res: Response) => {
 
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const usuario = await decoder(req as Request<ParamsDictionary, any, any, ParsedQs, Record<string, any>>);
+
+    if (!usuario) {
+        return res.status(StatusCodes.BAD_REQUEST).json({
+            errors: {
+                default: 'O usuário precisa ser informado'
+            }
+        });
+    }
+
     const result = await PlanosProvider.getAll(
+        usuario.id,
         req.query.page,
         req.query.limit,
         req.query.filter,
     );
-    
-    const count = await PlanosProvider.count(req.query.filter);
+
+    const count = await PlanosProvider.count(usuario.id, req.query.filter);
 
     if (result instanceof Error) {
         return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({

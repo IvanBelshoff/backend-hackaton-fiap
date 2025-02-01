@@ -1,10 +1,12 @@
 import { planoRepository } from '../../database/repositories/planoRepository';
 
-export const count = async (filter?: string): Promise<number | Error> => {
+export const count = async (id: number, filter?: string): Promise<number | Error> => {
     try {
 
         const result = planoRepository.createQueryBuilder('plano')
-            .select('plano');
+            .leftJoinAndSelect('plano.usuario', 'usuario')
+            .orderBy('plano.data_criacao', 'DESC')
+            .where('usuario.id = :id', { id });
 
         if (typeof filter === 'string') {
             result.andWhere('LOWER(plano.tema) LIKE LOWER(:tema)', { tema: `%${filter}%` });
